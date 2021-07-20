@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="  crossorigin="anonymous"></script>
+
+    <div class="login-box">
+      <img src="MOR.png" class="avatar" alt="Avatar Image">
+      <h1>Mesa Octagonal Rotatoria</h1>
+      <form action="menu.html" method="post">
+        <!-- USERNAME INPUT -->
+        <label for="username">Usuario</label>
+        <input type="text" id="txtUser" placeholder="Introduzca nombre de usuario">
+        <!-- PASSWORD INPUT -->
+        <label for="password">Contraseña</label>
+        <input type="password" id="txtPass" placeholder="Introduzca contraseña">
+        <input type="submit" value="Ingresar" id="btnSubmit">
+      </form>
+    </div>
+
+    <script>
+      $("#btnSubmit").click( function()
+        {
+            var user = $("#txtUser").val();
+            var pass = $("#txtPass").val();
+
+            if(user=="Admin" && pass=="Admin12345"){
+              //$.redirect('menu.html', {'user': user});
+              return true;
+            }
+            else{
+              alert("Usuario o contraseña incorrectos");
+              return false;
+            }
+        }
+      );
+    </script>
+  </body>
+</html>

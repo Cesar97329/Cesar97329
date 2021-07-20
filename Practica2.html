@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>Modo manual</title>
+    <link rel="stylesheet" href="manual.css">
+   </head>
+<body>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="  crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+      
+    <div>
+        <img src="TECNM.png" width="200" height="180" alt="Logo TECNM">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <font color="Blue" size=6 face="Comic Sans MS,arial">Presione arranque para ejecutar práctica 2</font>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <img src="Crode.png" width="300" height="210" alt="Logo CRODE"><br><br>
+    </div> 
+    <div>
+        <img src="MOR.png" align="right" width="400" height="450" alt="imagen de MOR">
+    </div>
+    <font color="green"><strong>
+        - Giro de la mesa hacia delante (Sentido horario)<br/>
+        - Movimiento temporizado<br/>
+        - Tiempo de espera entre ciclos de 3 seg<br/>
+        - Velocidad de rotación aproximada de 9 rpm (60%)
+    </strong></font><br/>
+    <form>
+        <div class="mb-3">
+            <button id="btnArranque" class="btn btn-info">Arranque</button>
+            &nbsp;&nbsp;&nbsp;
+            <button id="btnPEmergencia" class="btn btn-info">Paro</button>
+        </div>
+        <div>
+            <img src="ledblanco.png", id="led_1", width="220" height="170" alt="Led blanco">
+            <img src="ledblanco.png", id="led_2", width="220" height="170" alt="Led verde">
+            <img src="ledblanco.png", id="led_3", width="220" height="170" alt="Led rojo">
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mesa en movimiento
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mesa estacionaria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Paro activado</p>
+        </div>
+        <div>
+            <a href="menu.html">Regresar al menú principal</a> 
+        </div>
+    </form>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div>
+                    <h1>Cronómetro</h1>
+                    <p id="temporizador" class="d-flex justify-content-center font-weight-bold">0.00</p>
+                </div>
+                <div class="btn-group mb-2 d-flex justify-content-center" role="group">
+                    <button type="button" class="btn btn-success mr-2" id="iniciarS">Iniciar/Stop</button>
+                    <button type="button" class="btn btn-danger mr-2" id="resetear">Resetear</button>
+                    <button type="button" class="btn btn-info" id="grabar">Grabar</button>
+                </div>
+                <div>
+                    <h5>Tiempos Grabados</h5>
+                    <div id="almacenarTiempos">
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+          integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+          crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+          integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+          crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+          integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+          crossorigin="anonymous"></script>
+          <script src="cronometro.js"></script>
+</body>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<script>
+  $('#btnPEmergencia').toggle(function () {
+
+    firebase.database().ref('PEmergencia/').set({
+        PEmergencia: 1
+    })
+    firebase.database().ref('Arranque/').set({
+        Arranque: 0
+    })
+    btnArranque.setAttribute('disabled', "true");
+
+},function () {
+
+    firebase.database().ref('PEmergencia/').set({
+        PEmergencia: 0
+    });
+    btnArranque.removeAttribute('disabled')
+});
+</script>
+
+<script>
+    $("#btnArranque").click( function()
+               {
+                alert('Ejecutando práctica 2');
+                database.ref('ManualoPract').set({
+                ManualoPract: 1
+                })
+                database.ref('Practica/').set({
+                    Practica: 2
+                })
+                database.ref('Modo/').set({
+                    Modo: 0
+                });
+                database.ref('Tiempo/').set({
+                    Tiempo: 0
+                });
+                database.ref('Giro/').set({
+                    Giro: 0
+                });
+                database.ref('Velocidad/').set({
+                    Velocidad: 0
+                }); 
+               }
+            );
+</script>
+
+<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
+<script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyCeKuCv3D1nTS14IThgAU1CeJwYCqPUxro",
+      authDomain: "proyecto1-11044.firebaseapp.com",
+      databaseURL: "https://proyecto1-11044-default-rtdb.firebaseio.com",
+      projectId: "proyecto1-11044",
+      storageBucket: "proyecto1-11044.appspot.com",
+      messagingSenderId: "209448360310",
+      appId: "1:209448360310:web:83a3a80cd328f388f8c257"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+</script>
+<script src="./Operacion1.js"></script>
+</html>
